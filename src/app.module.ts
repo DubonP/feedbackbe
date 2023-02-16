@@ -8,19 +8,15 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 @Module({
   imports: [
     UserModule,
-    TypeOrmModule.forRootAsync({
-      imports: [ConfigModule],
-      useFactory: (configService: ConfigService) => ({
-        type: 'mysql',
-        host: configService.get('MYSQLHOST'),
-        port: +configService.get('MYSQLPORT'),
-        username: configService.get('MYSQLUSER'),
-        password: configService.get('MYSQLPASSWORD'),
-        database: configService.get('MYSQLDATABASE'),
-        autoLoadEntities: true,
-        synchronize: true,
-      }),
-      inject: [ConfigService],
+    TypeOrmModule.forRoot({
+      type: 'mysql',
+      host: 'containers-us-west-174.railway.app',
+      port: 6007,
+      username: 'root',
+      password: 'n0q9RRqhDcZTbTg0XZtd',
+      database: 'railway',
+      autoLoadEntities: true,
+      synchronize: true,
     }),
   ],
   controllers: [AppController],
